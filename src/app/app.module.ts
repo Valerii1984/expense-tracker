@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BalanceComponent } from './components/balance/balance.component';
 import { AddTransactionComponent } from './components/add-transaction/add-transaction.component';
-import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -13,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     BalanceComponent,
     AddTransactionComponent,
-    TransactionListComponent
+   
   ],
   imports: [
     BrowserModule,

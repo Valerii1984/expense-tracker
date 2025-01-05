@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
-
-export interface Transaction {
-  id: string;
-  name: string;
-  amount: number;
-  type: 'income' | 'expense';
-  category: string;
-  date: string;
-}
+import { Transaction } from 'src/app/interfaces/transaction.interface';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +8,16 @@ export interface Transaction {
 export class TransactionService {
   private readonly STORAGE_KEY = 'transactions';
 
+  constructor(private localStorageService: LocalStorageService) {}
+
   getTransactions(): Transaction[] {
-    const data = localStorage.getItem(this.STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
+    return this.localStorageService.getItem<Transaction[]>(this.STORAGE_KEY) || [];
   }
 
   addTransaction(transaction: Transaction): void {
     const transactions = this.getTransactions();
     transactions.push(transaction);
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(transactions));
+    this.localStorageService.setItem(this.STORAGE_KEY, transactions);
   }
 
   getBalance(): number {
